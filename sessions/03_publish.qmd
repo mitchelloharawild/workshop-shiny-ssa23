@@ -1,7 +1,7 @@
 ---
 title: "Publishing apps"
-subtitle: "<span class='code'>15:15-16:00</span>"
-date: "2022-12-05"
+subtitle: "<span class='code'>11:15-12:30</span>"
+date: "2023-12-01"
 image: "images/server.jpg"
 image-alt: "Server"
 tbl-colwidths: [5,20,75]

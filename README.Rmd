@@ -39,11 +39,11 @@ This three hour workshop provides the basics of creating interactive web applica
 ```{r, echo = FALSE}
 tribble(
   ~ Time, ~ Activity,
-  "13:00 - 13:45", "Session 1 - Basics of shiny",
-  "13:45 - 14:00", "Break 1 - Creating your first app",
-  "14:00 - 15:00", "Session 2 - Reactive programming",
-  "15:00 - 15:15", "Break 2 - Shiny Q & A",
-  "15:15 - 16:00", "Session 3 - Publishing apps"
+  "09:00 - 09:45", "Session 1 - Basics of shiny",
+  "09:45 - 10:00", "Break 1 - Creating your first app",
+  "10:00 - 11:00", "Session 2 - Reactive programming",
+  "11:00 - 11:15", "Break 2 - Shiny Q & A",
+  "11:15 - 12:30", "Session 3 - Publishing apps"
 ) %>% 
   knitr::kable()
 ```

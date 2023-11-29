@@ -1,7 +1,7 @@
 ---
 title: "Basics of Shiny"
-subtitle: "<span class='code'>13:00-13:45</span>"
-date: "2022-12-05"
+subtitle: "<span class='code'>09:00-09:45</span>"
+date: "2023-12-01"
 image: "images/dashboard.jpg"
 image-alt: "Dashboard"
 ---

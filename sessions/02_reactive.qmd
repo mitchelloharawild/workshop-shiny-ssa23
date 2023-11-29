@@ -1,7 +1,7 @@
 ---
 title: "Reactive programming"
-subtitle: "<span class='code'>14:00-15:00</span>"
-date: "2022-12-05"
+subtitle: "<span class='code'>10:00-11:00</span>"
+date: "2023-12-01"
 image: "images/code.jpg"
 image-alt: "Code"
 tbl-colwidths: [5,20,75]

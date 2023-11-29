@@ -8,7 +8,7 @@ title: "Interactive web applications<br> with Shiny for R"
 
 This three hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a UI, writing server code with reactive programming and publishing your application.
 
-This workshop is part of the [WOMBAT 2022](https://numbats.github.io/WOMBAT2022/) event, and will run online on Tuesday 6th December 2022 from 1PM - 4PM AEDT. 
+This workshop is part of the [Statistical Society of Australia](https://statsoc.org.au/)'s [Statistical Computing and Visualisation](https://statsoc.org.au/SCV-Tutorials) Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT. 
 
 ## Learning objectives
 
@@ -22,7 +22,7 @@ This workshop is part of the [WOMBAT 2022](https://numbats.github.io/WOMBAT2022/
 ## Instructor
 
 ![](images/mitch.jpeg){style="float:right;padding: 0 0 0 10px;" fig-alt="Headshot of Mitchell O'Hara-Wild" width="200"}
-[**Mitchell O'Hara-Wild**](https://mitchelloharawild.com/) (he/him) is an award-winning teaching associate and research assistant at Monash University with particular expertise in R package development, data analysis and statistical computing. He holds a Bachelor of Commerce (Honours) with a major in econometrics, and a Bachelor of Science majoring in computational science and mathematical statistics. Mitchell is the developer of several widely used R packages and operates a data consultancy which runs workshops and provides data analysis and tools. 
+[**Mitchell O'Hara-Wild**](https://mitchelloharawild.com/) (he/him) is an award-winning teaching associate and research assistant at Monash University with particular expertise in R package development, data analysis and statistical computing. He is currently undertaking a PhD and holds a Bachelor of Commerce (Honours) with a major in econometrics, and a Bachelor of Science majoring in computational science and mathematical statistics. Mitchell is the developer of several widely used R packages and operates a data consultancy which runs workshops and provides data analysis and tools. 
 
 <div align="center">
 <a href="https://www.mitchelloharawild.com"><img border="0" alt="Blog" src="https://assets.dryicons.com/uploads/icon/svg/4926/home.svg" width="35" height="35"></a>&ensp;
@@ -30,22 +30,6 @@ This workshop is part of the [WOMBAT 2022](https://numbats.github.io/WOMBAT2022/
 <a href="https://twitter.com/mitchoharawild"><img border="0" alt="Twitter" src="https://assets.dryicons.com/uploads/icon/svg/8385/c23f7ffc-ca8d-4246-8978-ce9f6d5bcc99.svg" width="35" height="35"></a>&ensp; 
 <a href="https://www.linkedin.com/in/mitchelloharawild/"><img border="0" alt="LinkedIn" src="https://assets.dryicons.com/uploads/icon/svg/8337/a347cd89-1662-4421-be90-58e5e8004eae.svg" width="35" height="35"></a>&ensp;&emsp;
 </div>
-
-## Helper
-
-![](images/patrick.jpeg){style="float:right;padding: 0 0 0 10px;" fig-alt="Headshot of Mitchell O'Hara-Wild" width="200"}
-
-[**Patrick Li**](https://github.com/TengMCing) is a second-year PhD student in the Department of Econometrics and Business Analytics, Monash University. He is currently working on automated visual inference using computer vision model with Di Cook and Emi Tanaka. His research interests are machine learning, computer vision, data visualisation and statistical software development.
-
-<div align="center">
-<a href="https://github.com/TengMCing"><img border="0" alt="Github" src="https://assets.dryicons.com/uploads/icon/svg/8312/cc33248a-e56e-4e7f-93f4-0e16350e5768.svg" width="35" height="35"></a>&ensp; 
-</div>
-
-<!-- # Registration -->
-
-<!-- Registration for this workshop is $150, and is available via TryBooking here: <https://www.trybooking.com/CCNOH> -->
-
-<!-- If you also register for the in-person event (Melbourne, Australia) on the following day you will receive a code for 30% off tutorial registrations. More information can be found at <https://numbats.github.io/WOMBAT2022/> -->
 
 # Preparation
 

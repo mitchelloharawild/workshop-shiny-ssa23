@@ -19,7 +19,7 @@ tbl-colwidths: [5,20,50,25]
 editor: source
 ---
 
-Tuesday, 6th December 2022
+Friday 1st December 2023
 
 Online, Zoom invitations have been sent to your registration email.
 
