@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Teaching Team",
+    "section": "",
+    "text": "Mitchell O’Hara-Wild :github: @mitchelloharawild"
+  },
+  {
+    "objectID": "sessions/02a_break.html",
+    "href": "sessions/02a_break.html",
+    "title": "Break - Shiny Q & A",
+    "section": "",
+    "text": "Time for a brief break!\nFeel free to ask any questions you might have about Shiny and reactive programming."
+  },
+  {
+    "objectID": "sessions/01a_break.html",
+    "href": "sessions/01a_break.html",
+    "title": "Break - Create your shiny app",
+    "section": "",
+    "text": "Time for a brief break!\nYou can use this time to continue creating your first shiny app, ask some questions, or just enjoy the break."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Friday 1st December 2023\nOnline, Zoom invitations have been sent to your registration email.\n\n\n\n\n\n\n\n\nTime\n\n\nModule\n\n\n\n\n\n\n\n\n\n09:00-09:45\n\n\nBasics of Shiny\n\n\n\n\n\n\n\n09:45-10:00\n\n\nBreak - Create your shiny app\n\n\n\n\n\n\n\n10:00-11:00\n\n\nReactive programming\n\n\n\n\n\n\n\n11:00-11:15\n\n\nBreak - Shiny Q & A\n\n\n\n\n\n\n\n11:15-12:30\n\n\nPublishing apps\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html#course-overview",
+    "href": "index.html#course-overview",
+    "title": "Interactive web applications with Shiny for R",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis three hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a UI, writing server code with reactive programming and publishing your application.\nThis workshop is part of the Statistical Society of Australia’s Statistical Computing and Visualisation Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT."
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Interactive web applications with Shiny for R",
+    "section": "Learning objectives",
+    "text": "Learning objectives\n\nLearn the basics of Shiny applications\nCreate a simple user interface including dashboards\nUnderstand reactive programming for Shiny server code\nPublish applications online with docker and/or shinyapps.io"
+  },
+  {
+    "objectID": "index.html#instructor",
+    "href": "index.html#instructor",
+    "title": "Interactive web applications with Shiny for R",
+    "section": "Instructor",
+    "text": "Instructor\n Mitchell O’Hara-Wild (he/him) is an award-winning teaching associate and research assistant at Monash University with particular expertise in R package development, data analysis and statistical computing. He is currently undertaking a PhD and holds a Bachelor of Commerce (Honours) with a major in econometrics, and a Bachelor of Science majoring in computational science and mathematical statistics. Mitchell is the developer of several widely used R packages and operates a data consultancy which runs workshops and provides data analysis and tools."
+  },
+  {
+    "objectID": "index.html#required-equipment",
+    "href": "index.html#required-equipment",
+    "title": "Interactive web applications with Shiny for R",
+    "section": "Required equipment",
+    "text": "Required equipment\nJust a computer capable of running R and an internet connection! 💻\nThis workshop will be ran online, so no other equipment is needed."
+  },
+  {
+    "objectID": "index.html#required-software",
+    "href": "index.html#required-software",
+    "title": "Interactive web applications with Shiny for R",
+    "section": "Required software",
+    "text": "Required software\nTo be able to complete the exercises of this workshop, please make sure to install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages. In order to deploy your app using docker, you will need to install docker from https://docs.docker.com/desktop/\n\nShiny packages and extensions\n\nshiny, shinythemes, echarts4r\n\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, stringr, forcats\n\n\nRun this code to install the packages if needed:\n\npackages &lt;- c(\n  \"shiny\", \"shinythemes\", \"echarts4r\",\n  \"ggplot2\", \"readr\", \"tibble\", \"tidyr\", \"stringr\", \"forcats\"\n)\n\ninstall.packages(setdiff(packages, rownames(installed.packages())))"
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "This work is licensed under a Creative Commons Attribution 4.0 International License."
+  },
+  {
+    "objectID": "sessions/01_basics.html",
+    "href": "sessions/01_basics.html",
+    "title": "Basics of Shiny",
+    "section": "",
+    "text": "View slides in full screen"
+  },
+  {
+    "objectID": "sessions/02_reactive.html",
+    "href": "sessions/02_reactive.html",
+    "title": "Reactive programming",
+    "section": "",
+    "text": "View slides in full screen"
+  },
+  {
+    "objectID": "sessions/03_publish.html",
+    "href": "sessions/03_publish.html",
+    "title": "Publishing apps",
+    "section": "",
+    "text": "View slides in full screen"
+  }
+]

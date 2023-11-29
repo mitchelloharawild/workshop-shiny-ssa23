@@ -1,0 +1,12 @@
+[
+  {
+    "listing": "/schedule.html",
+    "items": [
+      "/sessions/01_basics.html",
+      "/sessions/01a_break.html",
+      "/sessions/02_reactive.html",
+      "/sessions/02a_break.html",
+      "/sessions/03_publish.html"
+    ]
+  }
+]

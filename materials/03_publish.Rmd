@@ -1,0 +1,452 @@
+---
+title: "03 Publishing apps"
+subtitle: "Making your app available online."
+author: "Mitchell O'Hara-Wild"
+date: '06/12/2022'
+output:
+  xaringan::moon_reader:
+    css: ["theme/slides.css", "theme/hex.css", "theme/animate.css"]
+    seal: false
+    nature:
+      highlightStyle: solarized-dark
+      ratio: '16:9'
+      highlightLines: true
+      countIncrementalSlides: false 
+      beforeInit: ["./libs/jquery/jquery.min.js", "./libs/slides.js"]
+      slideNumberFormat: "%current%"
+---
+class: inverse
+background-image: url("images/title.jpg")
+background-size: cover
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, width = 120)
+
+library(tidyverse)
+library(shiny)
+library(fontawesome)
+library(countdown)
+
+theme_set(
+  theme_grey(base_size = 16) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "transparent"),
+    legend.background = element_rect(fill = "transparent")
+  )
+)
+```
+
+
+```{css, echo=FALSE}
+/* custom.css */
+.left-code {
+  color: #777;
+  width: 40%;
+  height: 92%;
+  float: left;
+}
+.right-plot {
+  width: 58%;
+  float: right;
+  padding-left: 1%;
+}
+```
+
+<ul class="hextile clr">
+	<li>
+    <div>
+      <h1>03</h1>
+      <p style = "padding-top: 30%; font-size: 1.2em">Publishing apps</p>
+    </div>
+  </li>
+  <li>
+    <img src="images/shiny.svg" alt=""/>
+  </li>
+  <li></li>
+  </li>
+  <li>
+    <div>
+      <p style = "padding-top: 20%; font-size: 1.33em">
+      Mitchell O'Hara‑Wild
+      </p>
+    </div>
+  </li>
+</ul>
+
+.footnote[
+Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+]
+
+---
+
+# Recap: A multi-file shiny app
+
+```{r}
+fs::dir_tree("../apps/bob_ross/01_bob_ross")
+```
+
+--
+
+Most shiny apps are organised into several files.
+
+* `ui.R`: The specification of the user interface
+* `server.R`: The R code to define behaviour
+* `global.R`: Objects creation accessible to both `ui.R` and `server.R`
+* `data/`: Folder for your data
+* `www/`: Folder for your web data (images, css, javascript, etc.)
+
+
+---
+
+# Recap: A multi-file shiny app
+
+```{r}
+fs::dir_tree("../apps/bob_ross/01_bob_ross")
+```
+
+Most shiny apps are organised into several files.
+
+* `ui.R`: The specification of the user interface
+* `server.R`: The R code to define behaviour
+* `global.R`: Objects creation accessible to both `ui.R` and `server.R`
+* `data/`: Folder for your data
+* **`www/`: Folder for your web data (images, css, javascript, etc.)**
+
+
+---
+class: center
+
+.box-12.bg-blond[
+# `r emo::ji("construction")` This app has room for improvement! `r emo::ji("construction")`
+]
+
+# How could we make it better?
+
+
+Remove code duplication ✅
+
+
+Add comments to server code ✅
+
+
+Make it more useful ✅
+
+
+Improve layout of outputs ✅
+
+
+**Make it look better**
+
+---
+
+# `r emo::ji("art")` Change colour swatches with `shinythemes`
+
+This package provides colour schemes from http://bootswatch.com/.
+
+--
+
+The fastest and easiest way to change the appearance of your app.
+
+To use it, specify the `theme` argument in your **UI's page function**.
+
+```{r, eval = FALSE}
+fluidPage(
+  theme = shinythemes::shinytheme("superhero"),
+  # The rest of your UI code goes here.
+)
+```
+
+You can also provide your own css file to this `theme` argument for a custom style - but remember, it must be in the `www/` folder!
+
+---
+class: feature
+
+# `r emo::ji("shooting_star")` Your turn!
+
+.box-12[
+
+## Pick a style for your app `r emo::ji("art")`
+
+Use `shinythemes` to change the theme for your gallery.
+
+1. Go to http://bootswatch.com/ and choose a theme you like.
+1. Open `bob_ross/04_bob_ross` and use `shinythemes` to set the app's theme by name.
+
+Hint: Code for setting the theme to "superhero" is shown on the previous page.
+
+<br>
+
+]
+
+```{r, echo = FALSE}
+countdown(minutes = 2L, seconds = 0L)
+```
+
+
+---
+
+# 🪟 Transparent plot backgrounds
+
+The plot looks out of place, with some plot styling it can look better.
+
+```{r, eval = FALSE}
+output$plot_proportion <- renderPlot({
+  elements_prop() %>% 
+    ggplot(aes(x = proportion, y = element)) + 
+    geom_col(fill = "white") + #<<
+    scale_x_continuous(labels = scales::percent, limits = c(0,1)) + 
+    theme( #<<
+      panel.background = element_rect(fill='transparent'), #<<
+      plot.background = element_rect(fill='transparent', color=NA), #<<
+      legend.background = element_rect(fill='transparent'), #<<
+      legend.box.background = element_rect(fill='transparent'), #<<
+      text = element_text(colour = "white"), #<<
+      axis.text = element_text(colour = "white") #<<
+    )  #<<
+}, bg = "transparent") #<<
+```
+
+Try it out by running the `bob_ross/06_bob_ross` app.
+
+---
+
+# ✨ Alternatively, use a JS plotting library
+
+Replacing ggplot2 with ECharts v5 via the echarts4r package
+
+```{r, eval = FALSE}
+# global.R
+library(echarts4r) #<<
+
+# ui.R
+tabPanel("Plot", 
+         "Frequency of elements in paintings",
+         echarts4rOutput("plot_proportion", height = "800px") #<<
+)
+
+# server.R
+output$plot_proportion <- renderEcharts4r({ #<<
+  e_charts(data = elements_prop(), x = element) %>%
+    e_bar(serie = proportion, legend = FALSE) %>%
+    e_flip_coords() %>% 
+    e_y_axis(inverse = TRUE)
+})
+```
+
+Try it out by running the `bob_ross/07_bob_ross` app.
+
+---
+background-image: url("images/awesome-shiny-extensions.jpg")
+background-size: cover
+
+<br>
+
+.box-12.bg-blond.bottom-margin.center[
+Curated list of extensions packages by Nan Xiao (肖楠)  
+https://github.com/nanxstats/awesome-shiny-extensions
+]
+
+---
+class: center
+
+.box-12.bg-blond[
+# 🎉 This app is ready to publish! 🎉
+]
+
+Remove code duplication ✅
+
+
+Add comments to server code ✅
+
+
+Make it more useful ✅
+
+
+Improve layout of outputs ✅
+
+
+Make it look better ✅
+
+---
+
+# 🤝 Some publishing options
+
+1. Share the source code fow users to run locally (GitHub)
+2. Host on a server with shinyapps.io (SaaS)
+3. Host on your own server (docker / shinyproxy)
+
+---
+
+# 🐙 Sharing apps with GitHub (or just a ZIP!)
+
+This is the easiest method for sharing your app, but it could be a bit tricky for end-users to run.
+
+* You simply provide the app's code
+* They need to know how to run R code
+* They need to install the app's package dependencies (`renv` helps)
+* Requires server code and data to be shared in full
+
+This is how I've shared the demo apps with you today!
+
+You can run an app directly from GitHub with one line of code:
+
+```{r, eval = FALSE}
+shiny::runGitHub("shiny-basics", "mitchelloharawild", subdir = "apps/bob_ross/07_bob_ross")
+```
+
+---
+
+# 🌥 Hosting with shinyapps.io
+
+Pros:
+1. Very easy to deploy and update (usually just one button)
+2. Support comes included from Posit
+3. Lots of extra features included, like authentication and metrics
+
+Cons:
+1. SaaS is a service (cost, off-site hosting)
+2. Performance tends to be limited, especially for the free tier.
+
+---
+
+# 🐳 Hosting yourself with docker
+
+Pros:
+1. Data and app is kept on-site
+2. Can be better value for performance
+3. Often cheaper, especially if you already run a server
+
+Cons:
+1. Need to manage your own deployment
+2. Can be tricky to install the right dependencies (renv helps)
+3. Not as many helpful tools built-in as shinyapps.io (authentication, management, etc.)
+
+Best approach is to use one docker container per app.
+
+This is how I deploy most of my apps, including hive.
+
+---
+
+
+# 🐳 Hosting yourself with docker: dockerfile
+
+```bash
+FROM rocker/shiny:latest
+
+# system libraries
+# Try to only install system libraries you actually need
+# Package Manager is a good resource to help discover system deps
+RUN apt-get update && apt-get install -y \
+    libcurl4-gnutls-dev \
+    libssl-dev
+  
+
+# install R packages required 
+# Change the packages list to suit your needs
+RUN R -e 'install.packages(c(\
+              "shiny", \
+              "echarts4r", \
+              "ggplot2" \
+            ), \
+            repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2022-12-22"\
+          )'
+
+
+# copy the app directory into the image
+COPY ./shiny-app/* /srv/shiny-server/
+
+# run app
+CMD ["/usr/bin/shiny-server"]
+
+```
+
+---
+
+# 🐳 Hosting yourself with docker: docker-compose
+
+```yaml
+  shiny:
+    image: rocker/shiny
+    container_name: shiny
+    ports:
+      - "3838:3838"
+    networks:
+      - proxied
+    volumes: 
+      - ${BASE_DIR}/shiny/apps:/srv/shiny-server/
+      - ${BASE_DIR}/shiny/logs:/var/log/shiny-server/
+    restart: unless-stopped
+```
+
+Install the apps you need by starting an R session within the container using `docker exec -it shiny R`.
+
+This shares packages across multiple apps - while it's good for saving space it's terrible for breaking apps!
+
+---
+
+# 🐳 Exposing your docker container to the web
+
+I use a reverse proxy, specifically `nginx-proxy-manager` in the same `docker-compose.yml` file.
+
+```yaml
+nginx-manager:
+  image: 'jc21/nginx-proxy-manager:latest'
+  restart: always
+  ports:
+    # Public HTTP Port:
+    - '80:80'
+    # Public HTTPS Port:
+    - '443:443'
+    # Admin Web Port:
+    - '81:81'
+  environment:
+    # These are the settings to access your db
+    DB_MYSQL_HOST: "nginx-db"
+    DB_MYSQL_PORT: 3306
+    DB_MYSQL_USER: "nginx-admin"
+    DB_MYSQL_PASSWORD: "changeme"
+    DB_MYSQL_NAME: "nginx"
+  volumes:
+    - ${BASE_DIR}/nginx/data:/data
+    - ${BASE_DIR}/nginx/letsencrypt:/etc/letsencrypt
+  depends_on:
+    - nginx-db
+```
+
+---
+
+# 🐳 Exposing your docker container to the web
+    
+```yaml
+nginx-db:
+  image: 'jc21/mariadb-aria:latest'
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: 'changeme'
+    MYSQL_DATABASE: 'nginx'
+    MYSQL_USER: 'nginx-admin'
+    MYSQL_PASSWORD: 'changeme'
+  volumes:
+    - ./data/mysql:/var/lib/mysql
+```
+
+---
+
+# 🐳 Hosting yourself with docker
+
+Often your tech team will be familiar with docker, so try talking to them about running the rocker/shiny container to deploy your app!
+
+---
+class: feature
+
+# `r emo::ji("clock12")` That's all for today!
+
+.box-12[
+## Where to go next?
+
+Lots more information (especially on non-standard evaluation!) in the Mastering Shiny online book: https://mastering-shiny.org/
+
+Consider integrating R code in existing web apps (non-shiny) using APIs via the plumber package.
+
+]
