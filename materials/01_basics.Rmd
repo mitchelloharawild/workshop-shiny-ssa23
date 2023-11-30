@@ -68,14 +68,14 @@ theme_set(
   <li>
     <div>
       <p style = "padding-top: 20%; font-size: 1.33em">
-      Mitchell O'Hara‑Wild
+      Mitchell O'Hara‑Wild (Nectric)
       </p>
     </div>
   </li>
 </ul>
 
 .footnote[
-Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+Materials at [workshop.nectric.com.au/shiny-ssa23/](https://workshop.nectric.com.au/shiny-ssa23/)
 ]
 
 ---
@@ -93,7 +93,7 @@ class: left-side
 
 [`r fa("github")` @mitchelloharawild](https://github.com/mitchelloharawild)
 
-[`r fa("twitter")` @mitchoharawild](https://twitter.com/mitchoharawild)
+[`r fa("linkedin")` @mitchelloharawild](https://www.linkedin.com/in/mitchelloharawild/)
 
 ]
 
@@ -109,37 +109,12 @@ class: left-side
 ]
 
 ---
-class: left-side
-
-.pull-left.center.bg-blond[
-
-.portrait[
-![](images/patrick.jpeg)
-]
-
-### Patrick Li
-
-### Monash
-
-[`r fa("github")` @TengMCing](https://github.com/TengMCing)
-
-]
-
-.pull-right[
-# Welcome, who am I?
-
-- `r emo::ji("mortar_board")` Second-year PhD student at Monash University
-- 🔎 Working on automated visual inference using computer vision models
-- 📦 Interested in machine learning, computer vision, data visualisation and statistical software development.
-]
-
----
 class: iframe-page
 
-<iframe src = "https://workshop.mitchelloharawild.com/shiny-basics/", style = "width:100%;height:60vh"></iframe>
+<iframe src = "https://workshop.nectric.com.au/shiny-ssa23/", style = "width:100%;height:60vh"></iframe>
 
 .center[
-<https://workshop.mitchelloharawild.com/shiny-basics/>
+<https://workshop.nectric.com.au/shiny-ssa23/>
 ]
 
 
@@ -159,7 +134,7 @@ class: bg-yellow feature
 # `r emo::ji("present")` Tutorial apps
 
 ```{r, eval = FALSE}
-usethis::use_course("https://workshop.mitchelloharawild.com/apps.zip")
+usethis::use_course("https://workshop.nectric.com.au/shiny-ssa23/apps.zip")
 ```
 
 ---
@@ -268,6 +243,27 @@ background-size: cover
 .box-12.bg-blond.bottom-margin.center[
 # Train & validate machine learning models
 <https://srkobakian.github.io/taipan/>
+]
+
+
+---
+background-image: url("images/whyhive_ss.png")
+background-size: contain
+background-position: top
+
+.box-12.bg-blond.bottom-margin.center[
+# Rapidly prototype data analysis products
+<https://www.whyhive.com/>
+]
+
+
+---
+background-image: url("images/wpd_ss.png")
+background-size: cover
+
+.box-12.bg-blond.bottom-margin.center[
+# Provide self-service exploration of data
+<https://shiny.nectric.com.au/wpd-app/>
 ]
 
 ---
@@ -504,7 +500,7 @@ library(tidyverse)
 # Tidy the data
 elements <- read_csv("data/elements-by-episode.csv") %>% 
   separate(EPISODE, c("season", "episode"), sep = c(3,6)) %>% 
-  gather("element", "exists", -season, -episode, -TITLE) %>% 
+  pivot_longer(cols = c(-season, -episode, -TITLE), names_to = "element", values_to = "exists") %>% 
   mutate(
     season = parse_number(season),
     episode = parse_number(episode),
@@ -678,7 +674,7 @@ fluidPage(
 
 ```{r}
 library(shiny)
-library(tidyverse)
+library(dplyr)
 function(input, output, session) {
   output$plot_proportion <- renderPlot({
     elements_prop <- elements %>% 
@@ -710,7 +706,7 @@ function(input, output, session) {
 
 ```{r}
 library(shiny)
-library(tidyverse)
+library(dplyr)
 function(input, output, session) {
   output$plot_proportion <- renderPlot({ #<<
     elements_prop <- elements %>% 
@@ -742,7 +738,7 @@ function(input, output, session) {
 
 ```{r}
 library(shiny)
-library(tidyverse)
+library(dplyr)
 function(input, output, session) {
   output$plot_proportion <- renderPlot({
     elements_prop <- elements %>% #<<
@@ -774,7 +770,7 @@ function(input, output, session) {
 
 ```{r}
 library(shiny)
-library(tidyverse)
+library(dplyr)
 function(input, output, session) {
   output$plot_proportion <- renderPlot({
     elements_prop <- elements %>% 
@@ -806,7 +802,7 @@ function(input, output, session) {
 
 ```{r}
 library(shiny)
-library(tidyverse)
+library(dplyr)
 function(input, output, session) {
   output$plot_proportion <- renderPlot({ 
     elements_prop <- elements %>% 
@@ -928,13 +924,17 @@ class: feature
 .box-12[
 ## Make the app more useful! `r emo::ji("man_artist")` `r emo::ji("woman_artist")`
 
-Add a selectize input (`selectizeInput()`) which allows you to focus on paintings which contain specific elements.
+Modify the `bob_ross/01_bob_ross` app to support a new feature.
+
+Add a selectize input (`selectizeInput()`) to filter paintings which contain specific elements.
 
 The output plot and table should show element frequency of paintings which:
 * Are in the selected season(s)
 * Contain the selected elements
 
-Speedster? There's no need to show 100% frequencies for the selected elements, remove them from the outputs.
+Finished early? The plot and table still show elements used in the filter - this is a bit odd since they are guaranteed to be in 100% of the paintings. 
+
+Improve the app by removing these unnecessary observations.
 
 ]
 
@@ -968,14 +968,71 @@ elements %>%
   ...
 ```
 
---
+---
 
-### Bonus
+# `r emo::ji("flag_in_hole")` Possible solution (bonus)
+
+### `ui.R`
 
 ```{r, eval = FALSE}
-... %>% 
-  filter(!(element %in% input$elements))
+# Element selector
+selectizeInput("elements",
+               "Paintings containing:",
+               choices = unique(elements$element),
+               multiple = TRUE)
 ```
+
+### `server.R`
+
+```{r, eval = FALSE}
+elements %>% 
+  group_by(season, episode) %>% 
+  filter(all(input$elements %in% element[exists])) %>%
+  filter(between(season, input$seasons[1], input$seasons[2])) %>% 
+  filter(!(element %in% input$elements)) %>% #<<
+  ...
+```
+
+---
+
+# `r emo::ji("robot")` Advanced UI design
+
+The `ui` of a shiny app simply creates HTML with special shiny tags.
+
+```{r}
+sliderInput(inputId = "seasons", label = "Included seasons:",
+            min = 1L, max = 30L, value = c(1L, 30L))
+```
+
+```html
+<div class="form-group shiny-input-container">
+  <label class="control-label" id="seasons-label" for="seasons">Included seasons:</label>
+  <input class="js-range-slider" id="seasons" data-skin="shiny" data-type="double" data-min="1" data-max="30" data-from="1" data-to="30" data-step="0.5" data-grid="true" data-grid-num="9.66666666666667" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-drag-interval="true" data-data-type="number"/>
+</div>
+```
+
+--
+
+You can add these shiny inputs to the HTML of any webpage.
+
+This allows your shiny app to seamlessly match the style of your existing website, or team up with web designers and create beautiful apps.
+
+
+---
+
+# `r emo::ji("robot")` Advanced UI design
+
+The `ui` of a shiny app simply creates HTML with special shiny tags.
+
+```{r}
+plotOutput("plot_proportion", height = "200px")
+```
+
+```html
+<div class="shiny-plot-output html-fill-item" id="plot_proportion" style="width:100%;height:200px;"></div>
+```
+
+You can also add shiny outputs to the HTML of any webpage.
 
 ---
 class: feature

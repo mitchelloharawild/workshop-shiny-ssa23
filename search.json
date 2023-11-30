@@ -28,13 +28,6 @@
     "text": "Friday 1st December 2023\nOnline, Zoom invitations have been sent to your registration email.\n\n\n\n\n\n\n\n\nTime\n\n\nModule\n\n\n\n\n\n\n\n\n\n09:00-09:45\n\n\nBasics of Shiny\n\n\n\n\n\n\n\n09:45-10:00\n\n\nBreak - Create your shiny app\n\n\n\n\n\n\n\n10:00-11:00\n\n\nReactive programming\n\n\n\n\n\n\n\n11:00-11:15\n\n\nBreak - Shiny Q & A\n\n\n\n\n\n\n\n11:15-12:30\n\n\nPublishing apps\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "index.html#course-overview",
-    "href": "index.html#course-overview",
-    "title": "Interactive web applications with Shiny for R",
-    "section": "Course Overview",
-    "text": "Course Overview\nThis three hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a UI, writing server code with reactive programming and publishing your application.\nThis workshop is part of the Statistical Society of Australia’s Statistical Computing and Visualisation Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT."
-  },
-  {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
     "title": "Interactive web applications with Shiny for R",
@@ -60,7 +53,7 @@
     "href": "index.html#required-software",
     "title": "Interactive web applications with Shiny for R",
     "section": "Required software",
-    "text": "Required software\nTo be able to complete the exercises of this workshop, please make sure to install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages. In order to deploy your app using docker, you will need to install docker from https://docs.docker.com/desktop/\n\nShiny packages and extensions\n\nshiny, shinythemes, echarts4r\n\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, stringr, forcats\n\n\nRun this code to install the packages if needed:\n\npackages &lt;- c(\n  \"shiny\", \"shinythemes\", \"echarts4r\",\n  \"ggplot2\", \"readr\", \"tibble\", \"tidyr\", \"stringr\", \"forcats\"\n)\n\ninstall.packages(setdiff(packages, rownames(installed.packages())))"
+    "text": "Required software\nTo be able to complete the exercises of this workshop, please make sure to install a suitable IDE (such as RStudio), a recent version of R (4.1+) and the following packages. In order to deploy your app using docker, you will need to install docker from https://docs.docker.com/desktop/\n\nShiny packages and extensions\n\nshiny, shinythemes, echarts4r\n\ntidyverse packages and friends\n\nggplot2, readr, tibble, dplyr, tidyr, stringr, forcats\n\n\nRun this code to install the packages if needed:\n\npackages &lt;- c(\n  \"shiny\", \"shinythemes\", \"echarts4r\", \"dplyr\",\n  \"ggplot2\", \"readr\", \"tibble\", \"tidyr\", \"stringr\", \"forcats\"\n)\n\ninstall.packages(setdiff(packages, rownames(installed.packages())))"
   },
   {
     "objectID": "license.html",

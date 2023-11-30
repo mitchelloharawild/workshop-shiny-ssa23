@@ -52,14 +52,14 @@ background-size: cover
   &lt;li&gt;
     &lt;div&gt;
       &lt;p style = "padding-top: 20%; font-size: 1.33em"&gt;
-      Mitchell O'Hara‑Wild
+      Mitchell O'Hara‑Wild (Nectric)
       &lt;/p&gt;
     &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 .footnote[
-Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+Materials at [workshop.nectric.com.au/shiny-ssa23/](https://workshop.nectric.com.au/shiny-ssa23/)
 ]
 
 ---
@@ -73,13 +73,13 @@ fs::dir_tree("../apps/bob_ross/01_bob_ross")
 
 ```
 ## ../apps/bob_ross/01_bob_ross
-## ├── data
-## │   └── elements-by-episode.csv
-## ├── global.R
-## ├── server.R
-## ├── ui.R
-## └── www
-##     └── joy_of_painting.jpg
+## +-- data
+## |   \-- elements-by-episode.csv
+## +-- global.R
+## +-- server.R
+## +-- ui.R
+## \-- www
+##     \-- joy_of_painting.jpg
 ```
 
 --
@@ -104,13 +104,13 @@ fs::dir_tree("../apps/bob_ross/01_bob_ross")
 
 ```
 ## ../apps/bob_ross/01_bob_ross
-## ├── data
-## │   └── elements-by-episode.csv
-## ├── global.R
-## ├── server.R
-## ├── ui.R
-## └── www
-##     └── joy_of_painting.jpg
+## +-- data
+## |   \-- elements-by-episode.csv
+## +-- global.R
+## +-- server.R
+## +-- ui.R
+## \-- www
+##     \-- joy_of_painting.jpg
 ```
 
 Most shiny apps are organised into several files.
@@ -188,7 +188,7 @@ Hint: Code for setting the theme to "superhero" is shown on the previous page.
 
 ]
 
-<div class="countdown" id="timer_dfbd3ecd" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_57d8f4f1" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">02</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -287,6 +287,7 @@ Make it look better ✅
 1. Share the source code fow users to run locally (GitHub)
 2. Host on a server with shinyapps.io (SaaS)
 3. Host on your own server (docker / shinyproxy)
+4. Host on a static website and run shiny in the browser (shinylive)
 
 ---
 
@@ -305,7 +306,7 @@ You can run an app directly from GitHub with one line of code:
 
 
 ```r
-shiny::runGitHub("shiny-basics", "mitchelloharawild", subdir = "apps/bob_ross/07_bob_ross")
+shiny::runGitHub("workshop-shiny-ssa23", "mitchelloharawild", subdir = "apps/bob_ross/07_bob_ross")
 ```
 
 ---
@@ -322,8 +323,29 @@ Cons:
 2. Performance tends to be limited, especially for the free tier.
 
 ---
+class: feature
 
-# 🐳 Hosting yourself with docker
+# 🌠 Our turn!
+
+&lt;br&gt;
+
+.box-12[
+
+## Deploy an app to shinyapps.io ☁️
+
+Select your favourite app from today and publish it to [shinyapps.io](https://www.shinyapps.io/)
+
+1. When viewing your selected app, click the publish button.
+1. Set up your &lt;shinyapps.io&gt; access token in R.
+1. Select all relevant app files and click 'Publish'
+
+]
+
+
+
+---
+
+# 🐳 Hosting with docker
 
 Pros:
 1. Data and app is kept on-site
@@ -337,46 +359,58 @@ Cons:
 
 Best approach is to use one docker container per app.
 
-This is how I deploy most of my apps, including hive.
-
 ---
 
+# 🐳 Hosting with docker: Dockerfile
 
-# 🐳 Hosting yourself with docker: dockerfile
+1. Create the Dockerfile (update dependencies)
 
 ```bash
 FROM rocker/shiny:latest
 
 # system libraries
 # Try to only install system libraries you actually need
-# Package Manager is a good resource to help discover system deps
 RUN apt-get update &amp;&amp; apt-get install -y \
     libcurl4-gnutls-dev \
     libssl-dev
   
-
-# install R packages required 
-# Change the packages list to suit your needs
+# install R packages required (update the packages list)
 RUN R -e 'install.packages(c(\
               "shiny", \
-              "echarts4r", \
               "ggplot2" \
             ), \
-            repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2022-12-22"\
+            repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-12-01"\
           )'
 
 
 # copy the app directory into the image
-COPY ./shiny-app/* /srv/shiny-server/
+COPY ./shiny-app/. /srv/shiny-server/
+
+EXPOSE 3838
 
 # run app
 CMD ["/usr/bin/shiny-server"]
-
 ```
 
 ---
 
-# 🐳 Hosting yourself with docker: docker-compose
+# 🐳 Hosting with docker: Dockerfile
+
+2\. Build the docker image
+
+```bash
+docker build -t "image-name" .
+```
+
+3\. Create and run the docker container
+
+```bash
+docker run --rm -ti -p 3838:3838 image-name
+```
+
+---
+
+# 🐳 Hosting with docker: docker-compose
 
 ```yaml
   shiny:
@@ -400,18 +434,15 @@ This shares packages across multiple apps - while it's good for saving space it'
 
 # 🐳 Exposing your docker container to the web
 
-I use a reverse proxy, specifically `nginx-proxy-manager` in the same `docker-compose.yml` file.
+Port forwarding and reverse proxies - I use `jc21/nginx-proxy-manager`.
 
 ```yaml
 nginx-manager:
   image: 'jc21/nginx-proxy-manager:latest'
   restart: always
   ports:
-    # Public HTTP Port:
     - '80:80'
-    # Public HTTPS Port:
     - '443:443'
-    # Admin Web Port:
     - '81:81'
   environment:
     # These are the settings to access your db
@@ -444,16 +475,33 @@ nginx-db:
     - ./data/mysql:/var/lib/mysql
 ```
 
+--
+
+Tech infrastructure teams are usually familiar with docker, and might be more receptive to running a docker container rather than maintaining a shiny server for your app.
+
 ---
 
-# 🐳 Hosting yourself with docker
+# ✨ Or try shinylive on a static website
 
-Often your tech team will be familiar with docker, so try talking to them about running the rocker/shiny container to deploy your app!
+Pros:
+1. Can use free static web hosts like Github Pages
+2. Serverless and safer - all code runs in the user's browser
+
+Cons:
+1. Data and app is shared to users (nothing is secret!)
+2. Bleeding edge and things could break
+3. Can take a while to start, as R, shiny, and the packages need downloading
+3. Lacks the helpful tools built-in with shinyapps.io (authentication, management, etc.)
+
+
+More information: https://github.com/posit-dev/shinylive
 
 ---
 class: feature
 
 # 🕛 That's all for today!
+
+&lt;br&gt;
 
 .box-12[
 ## Where to go next?
@@ -514,6 +562,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

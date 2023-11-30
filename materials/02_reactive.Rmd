@@ -68,14 +68,14 @@ theme_set(
   <li>
     <div>
       <p style = "padding-top: 20%; font-size: 1.33em">
-      Mitchell O'Hara‑Wild
+      Mitchell O'Hara‑Wild (Nectric)
       </p>
     </div>
   </li>
 </ul>
 
 .footnote[
-Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+Materials at [workshop.nectric.com.au/shiny-ssa23/](https://workshop.nectric.com.au/shiny-ssa23/)
 ]
 
 ---
@@ -233,11 +233,13 @@ In more complicated apps, changing one input can invalidates many objects.
 
 --
 
-When a reactive object is invalidated, their dependency graph is reset.
+<hr>
+
+When a reactive object is invalidated, their dependency graph is **reset**.
 
 --
 
-Reactive objects are then re-calculated, adding back any dependencies.
+Reactive objects are then re-calculated, **adding back any dependencies**.
 
 
 ---
@@ -248,7 +250,9 @@ class: feature
 .box-12[
 ## Create a reactive graph of the Bob Ross app! `r emo::ji("twisted_rightwards_arrows")`
 
-1. Start a logging the app's reactivity
+Using the `bob_ross/03_bob_ross` app,
+
+1. Start logging the app's reactivity
 1. Use the app and end the session.
 1. Does the reactive graph look like you expected?
 1. Follow the log in time, what have you learnt about Shiny?
@@ -259,7 +263,7 @@ class: feature
 ]
 
 ```{r, echo = FALSE}
-countdown(minutes = 3L)
+countdown(minutes = 5L)
 ```
 
 ---
@@ -333,6 +337,7 @@ The code repetition is problematic for many reasons:
 * Updating the code requires changing two places
 * More difficult to understand the workflow
 
+
 ---
 
 # `r emo::ji("superhero")` Reactive expressions to the rescue
@@ -342,6 +347,16 @@ A reactive expression is an **intermediate step** in the reactive workflow.
 It accepts inputs and the result can be used as inputs to other reactive code.
 
 --
+
+![reactive graph explanation](images/react_log_explained.png)
+
+---
+
+# `r emo::ji("superhero")` Reactive expressions to the rescue
+
+A reactive expression is an **intermediate step** in the reactive workflow.
+
+It accepts inputs and the result can be used as inputs to other reactive code.
 
 Reactive expressions are created with the `reactive()` function:
 
@@ -356,7 +371,7 @@ elements_prop <- reactive({ #<<
 }) #<<
 ```
 
-The resulting value can be accessed in renderers with `elements_prop()`.
+This object can be accessed in reactive contexts with `elements_prop()`.
 
 ---
 
@@ -542,7 +557,7 @@ observeEvent(input$submit, print("You clicked submit!"))
 ```
 
 .warn[
-`r emo::ji("warning")` **Warning:** observers don't return values, they instead cause side-effects.
+`r emo::ji("warning")` **Warning:** observers don't return values, they instead cause *side-effects*.
 
 Observers can be useful but many side-effects can create complex bugs.
 ]
@@ -617,7 +632,7 @@ It avoids calculating things which would have never been seen (like our tabs)
 ## `r emo::ji("ghost")` But beware, mistakes may be ghostly.
 
 ```{r, eval = FALSE}
-output$greetnig <- renderText({
+output$greating <- renderText({
   sprintf("Hello %s!", input$name)
 })
 ```
@@ -641,7 +656,9 @@ If you finish early, fix a similar bug in `starwars/03_sw_broken`.
 
 > Hint: 
 > 
-> Look for typos and if you're having trouble, look at the reactive graph
+> If you're having trouble, look at the reactive graph.
+>
+> Focus on what's not working - in this case the table.
 ]
 
 ```{r, echo = FALSE}
@@ -895,9 +912,7 @@ The user doesn't want to wait while adjusting inputs.
 
 # `r emo::ji("racehorse")` Rate limiting (debounce/throttle)
 
-Shiny has inbuilt rate limiting, but this often isn't enough.
-
-There are two rate limiting functions:
+Shiny has two in-built rate limiting functions:
 
 * `throttle()`: Throttle limits how frequently updates occur  
   `ooo-oo-oo---- => o--o--o--o---`
@@ -909,7 +924,15 @@ There are two rate limiting functions:
 
 These functions only work on **reactive expressions** (`reactive()`).
 
-To rate limit an input, you'll need to use `debounce(reactive(input$???), millis)`.
+To rate limit an input, we use `debounce(reactive(input$???), millis)`.
+
+---
+
+# `r emo::ji("racehorse")` Waiting to react
+
+Alternatively, consider using `eventReactive()` or `observeEvent()` with an `actionButton()` to trigger reactivity only when the user presses a button.
+
+This is particularly useful if the code is expensive to run, which the user wouldn't want to wait for while selecting their inputs.
 
 ---
 class: feature
@@ -968,7 +991,7 @@ req(input$num_simulations > 0)
 # 🦺 Code safety and input validation
 
 
-When using tidyverse (or othey non-standard evaluation package functions) with user data, use `!!` to match variables outside of the data. For example:
+When using tidyverse (or other non-standard evaluation functions) with user data, use `!!` to match variables outside of the data. For example:
 
 ```r
 starwars %>% 
@@ -979,7 +1002,7 @@ starwars %>%
 
 Too complex for today, but well worth learning - it's useful for more than just Shiny!
 
-In short - a safe way to convert a text input to a variable name in dplyr is `!!sym(input$variable)`.
+A safe way to convert a **text input** to a **variable name** in dplyr is `!!sym(input$variable)`.
 
 ---
 class: feature
