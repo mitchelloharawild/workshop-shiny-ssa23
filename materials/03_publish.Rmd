@@ -348,36 +348,51 @@ Best approach is to use one docker container per app.
 
 ---
 
+# 🐳 Hosting with docker: Dockerfile
 
-# 🐳 Hosting with docker: dockerfile
+1. Create the Dockerfile (update dependencies)
 
 ```bash
 FROM rocker/shiny:latest
 
 # system libraries
 # Try to only install system libraries you actually need
-# Package Manager is a good resource to help discover system deps
 RUN apt-get update && apt-get install -y \
     libcurl4-gnutls-dev \
     libssl-dev
   
-
-# install R packages required 
-# Change the packages list to suit your needs
+# install R packages required (update the packages list)
 RUN R -e 'install.packages(c(\
               "shiny", \
               "ggplot2" \
             ), \
-            repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2022-12-22"\
+            repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2023-12-01"\
           )'
 
 
 # copy the app directory into the image
-COPY ./shiny-app/* /srv/shiny-server/
+COPY ./shiny-app/. /srv/shiny-server/
+
+EXPOSE 3838
 
 # run app
 CMD ["/usr/bin/shiny-server"]
+```
 
+---
+
+# 🐳 Hosting with docker: Dockerfile
+
+2\. Build the docker image
+
+```bash
+docker build -t "image-name" .
+```
+
+3\. Create and run the docker container
+
+```bash
+docker run --rm -ti -p 3838:3838 image-name
 ```
 
 ---
