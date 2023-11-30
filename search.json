@@ -23,9 +23,30 @@
   {
     "objectID": "schedule.html",
     "href": "schedule.html",
-    "title": "Schedule",
+    "title": "Materials",
     "section": "",
-    "text": "Friday 1st December 2023\nOnline, Zoom invitations have been sent to your registration email.\n\n\n\n\n\n\n\n\nTime\n\n\nModule\n\n\n\n\n\n\n\n\n\n09:00-09:45\n\n\nBasics of Shiny\n\n\n\n\n\n\n\n09:45-10:00\n\n\nBreak - Create your shiny app\n\n\n\n\n\n\n\n10:00-11:00\n\n\nReactive programming\n\n\n\n\n\n\n\n11:00-11:15\n\n\nBreak - Shiny Q & A\n\n\n\n\n\n\n\n11:15-12:30\n\n\nPublishing apps\n\n\n\n\n\n\nNo matching items"
+    "text": "Time: 9AM - 12:30PM AEDT, Friday 1st December 2023\nPlace: Online, Zoom invitations have been sent to your registration email."
+  },
+  {
+    "objectID": "schedule.html#sessions",
+    "href": "schedule.html#sessions",
+    "title": "Materials",
+    "section": "",
+    "text": "Time: 9AM - 12:30PM AEDT, Friday 1st December 2023\nPlace: Online, Zoom invitations have been sent to your registration email."
+  },
+  {
+    "objectID": "schedule.html#exercises",
+    "href": "schedule.html#exercises",
+    "title": "Materials",
+    "section": "Exercises",
+    "text": "Exercises\nThroughout the sessions we will be working with prepared shiny apps.\nTo follow along and complete the exercises, you should download the apps from the drop-down in the top right, or simply run:\nusethis::use_course(\"https://workshop.nectric.com.au/shiny-ssa23/apps.zip\")"
+  },
+  {
+    "objectID": "schedule.html#schedule",
+    "href": "schedule.html#schedule",
+    "title": "Materials",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\n\n\n\n\n\nTime\n\n\nModule\n\n\n\n\n\n\n\n\n\n09:00-09:45\n\n\nBasics of Shiny\n\n\n\n\n\n\n\n09:45-10:00\n\n\nBreak - Create your shiny app\n\n\n\n\n\n\n\n10:00-11:00\n\n\nReactive programming\n\n\n\n\n\n\n\n11:00-11:15\n\n\nBreak - Shiny Q & A\n\n\n\n\n\n\n\n11:15-12:30\n\n\nPublishing apps\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html#learning-objectives",
