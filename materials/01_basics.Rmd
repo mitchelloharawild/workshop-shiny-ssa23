@@ -68,14 +68,14 @@ theme_set(
   <li>
     <div>
       <p style = "padding-top: 20%; font-size: 1.33em">
-      Mitchell O'Hara‑Wild
+      Mitchell O'Hara‑Wild (Nectric)
       </p>
     </div>
   </li>
 </ul>
 
 .footnote[
-Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+Materials at [workshop.nectric.com.au/shiny-ssa23/](https://workshop.nectric.com.au/shiny-ssa23/)
 ]
 
 ---
@@ -93,7 +93,7 @@ class: left-side
 
 [`r fa("github")` @mitchelloharawild](https://github.com/mitchelloharawild)
 
-[`r fa("twitter")` @mitchoharawild](https://twitter.com/mitchoharawild)
+[`r fa("linkedin")` @mitchelloharawild](https://www.linkedin.com/in/mitchelloharawild/)
 
 ]
 
@@ -109,37 +109,12 @@ class: left-side
 ]
 
 ---
-class: left-side
-
-.pull-left.center.bg-blond[
-
-.portrait[
-![](images/patrick.jpeg)
-]
-
-### Patrick Li
-
-### Monash
-
-[`r fa("github")` @TengMCing](https://github.com/TengMCing)
-
-]
-
-.pull-right[
-# Welcome, who am I?
-
-- `r emo::ji("mortar_board")` Second-year PhD student at Monash University
-- 🔎 Working on automated visual inference using computer vision models
-- 📦 Interested in machine learning, computer vision, data visualisation and statistical software development.
-]
-
----
 class: iframe-page
 
-<iframe src = "https://workshop.mitchelloharawild.com/shiny-basics/", style = "width:100%;height:60vh"></iframe>
+<iframe src = "https://workshop.nectric.com.au/shiny-ssa23/", style = "width:100%;height:60vh"></iframe>
 
 .center[
-<https://workshop.mitchelloharawild.com/shiny-basics/>
+<https://workshop.nectric.com.au/shiny-ssa23/>
 ]
 
 
@@ -159,7 +134,7 @@ class: bg-yellow feature
 # `r emo::ji("present")` Tutorial apps
 
 ```{r, eval = FALSE}
-usethis::use_course("https://workshop.mitchelloharawild.com/apps.zip")
+usethis::use_course("https://workshop.nectric.com.au/shiny-ssa23/apps.zip")
 ```
 
 ---
@@ -268,6 +243,15 @@ background-size: cover
 .box-12.bg-blond.bottom-margin.center[
 # Train & validate machine learning models
 <https://srkobakian.github.io/taipan/>
+]
+
+---
+background-image: url("images/wpd_ss.png")
+background-size: cover
+
+.box-12.bg-blond.bottom-margin.center[
+# Provide self-service exploration of data
+<https://shiny.nectric.com.au/wpd-app/>
 ]
 
 ---
@@ -968,13 +952,29 @@ elements %>%
   ...
 ```
 
---
+---
 
-### Bonus
+# `r emo::ji("flag_in_hole")` Possible solution (bonus)
+
+### `ui.R`
 
 ```{r, eval = FALSE}
-... %>% 
-  filter(!(element %in% input$elements))
+# Element selector
+selectizeInput("elements",
+               "Paintings containing:",
+               choices = unique(elements$element),
+               multiple = TRUE)
+```
+
+### `server.R`
+
+```{r, eval = FALSE}
+elements %>% 
+  group_by(season, episode) %>% 
+  filter(all(input$elements %in% element[exists])) %>%
+  filter(between(season, input$seasons[1], input$seasons[2])) %>% 
+  filter(!(element %in% input$elements)) %>% #<<
+  ...
 ```
 
 ---

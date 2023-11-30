@@ -68,14 +68,14 @@ theme_set(
   <li>
     <div>
       <p style = "padding-top: 20%; font-size: 1.33em">
-      Mitchell O'Hara‑Wild
+      Mitchell O'Hara‑Wild (Nectric)
       </p>
     </div>
   </li>
 </ul>
 
 .footnote[
-Materials at [workshop.mitchelloharawild.com/shiny-basics/](https://workshop.mitchelloharawild.com/shiny-basics/)
+Materials at [workshop.nectric.com.au/shiny-ssa23/](https://workshop.nectric.com.au/shiny-ssa23/)
 ]
 
 ---
@@ -275,6 +275,7 @@ Make it look better ✅
 1. Share the source code fow users to run locally (GitHub)
 2. Host on a server with shinyapps.io (SaaS)
 3. Host on your own server (docker / shinyproxy)
+4. Host on a static website and run shiny in the browser (shinylive)
 
 ---
 
@@ -292,7 +293,7 @@ This is how I've shared the demo apps with you today!
 You can run an app directly from GitHub with one line of code:
 
 ```{r, eval = FALSE}
-shiny::runGitHub("shiny-basics", "mitchelloharawild", subdir = "apps/bob_ross/07_bob_ross")
+shiny::runGitHub("workshop-shiny-ssa23", "mitchelloharawild", subdir = "apps/bob_ross/07_bob_ross")
 ```
 
 ---
@@ -309,8 +310,29 @@ Cons:
 2. Performance tends to be limited, especially for the free tier.
 
 ---
+class: feature
 
-# 🐳 Hosting yourself with docker
+# `r emo::ji("shooting_star")` Our turn!
+
+<br>
+
+.box-12[
+
+## Deploy an app to shinyapps.io `r emo::ji("cloud")`
+
+Select your favourite app from today and publish it to [shinyapps.io](https://www.shinyapps.io/)
+
+1. When viewing your selected app, click the publish button.
+1. Set up your <shinyapps.io> access token in R.
+1. Select all relevant app files and click 'Publish'
+
+]
+
+
+
+---
+
+# 🐳 Hosting with docker
 
 Pros:
 1. Data and app is kept on-site
@@ -324,12 +346,10 @@ Cons:
 
 Best approach is to use one docker container per app.
 
-This is how I deploy most of my apps, including hive.
-
 ---
 
 
-# 🐳 Hosting yourself with docker: dockerfile
+# 🐳 Hosting with docker: dockerfile
 
 ```bash
 FROM rocker/shiny:latest
@@ -346,7 +366,6 @@ RUN apt-get update && apt-get install -y \
 # Change the packages list to suit your needs
 RUN R -e 'install.packages(c(\
               "shiny", \
-              "echarts4r", \
               "ggplot2" \
             ), \
             repos="https://packagemanager.rstudio.com/cran/__linux__/focal/2022-12-22"\
@@ -363,7 +382,7 @@ CMD ["/usr/bin/shiny-server"]
 
 ---
 
-# 🐳 Hosting yourself with docker: docker-compose
+# 🐳 Hosting with docker: docker-compose
 
 ```yaml
   shiny:
@@ -387,18 +406,15 @@ This shares packages across multiple apps - while it's good for saving space it'
 
 # 🐳 Exposing your docker container to the web
 
-I use a reverse proxy, specifically `nginx-proxy-manager` in the same `docker-compose.yml` file.
+Port forwarding and reverse proxies - I use `jc21/nginx-proxy-manager`.
 
 ```yaml
 nginx-manager:
   image: 'jc21/nginx-proxy-manager:latest'
   restart: always
   ports:
-    # Public HTTP Port:
     - '80:80'
-    # Public HTTPS Port:
     - '443:443'
-    # Admin Web Port:
     - '81:81'
   environment:
     # These are the settings to access your db
@@ -431,16 +447,33 @@ nginx-db:
     - ./data/mysql:/var/lib/mysql
 ```
 
+--
+
+Tech infrastructure teams are usually familiar with docker, and might be more receptive to running a docker container rather than maintaining a shiny server for your app.
+
 ---
 
-# 🐳 Hosting yourself with docker
+# ✨ Or try shinylive on a static website
 
-Often your tech team will be familiar with docker, so try talking to them about running the rocker/shiny container to deploy your app!
+Pros:
+1. Can use free static web hosts like Github Pages
+2. Serverless and safer - all code runs in the user's browser
+
+Cons:
+1. Data and app is shared to users (nothing is secret!)
+2. Bleeding edge and things could break
+3. Can take a while to start, as R, shiny, and the packages need downloading
+3. Lacks the helpful tools built-in with shinyapps.io (authentication, management, etc.)
+
+
+More information: https://github.com/posit-dev/shinylive
 
 ---
 class: feature
 
 # `r emo::ji("clock12")` That's all for today!
+
+<br>
 
 .box-12[
 ## Where to go next?
