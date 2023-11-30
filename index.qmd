@@ -8,14 +8,14 @@ title-block-banner: false
 
 # Course Overview
 
-This three hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a UI, writing server code with reactive programming and publishing your application.
+This three-hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a user interface (UI), writing server code with reactive programming, and publishing your application.
 
 This workshop is part of the [Statistical Society of Australia](https://statsoc.org.au/)'s [Statistical Computing and Visualisation](https://www.statsoc.org.au/Statistical-Computing-and-Visualisation-Section) Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT. 
 
 ## Learning objectives
 
 -   Learn the basics of Shiny applications
--   Create a simple user interface including dashboards
+-   Create a simple UI including dashboards
 -   Understand reactive programming for Shiny server code
 -   Publish applications online with docker and/or [shinyapps.io](https://www.shinyapps.io/)
 
@@ -34,7 +34,7 @@ This workshop is part of the [Statistical Society of Australia](https://statsoc.
 
 # Preparation
 
-The workshop will cover the basics of creating shiny web applications. There is no need for prior experience in website development or shiny is required to get the most out of this workshop. Familiarity with writing R code is expected, and being comfortable with using tidyverse packages including dplyr and ggplot2 would be beneficial. If you are unfamiliar with writing R code or using the tidyverse, consider working through the learnr materials here: <https://learnr.numbat.space/>.
+The workshop will cover the basics of creating shiny web applications. There is no need for prior experience in website development or shiny to get the most out of this workshop. Familiarity with writing R code is expected, and being comfortable with using tidyverse packages including dplyr and ggplot2 would be beneficial. If you are unfamiliar with writing R code or using the tidyverse, consider working through the learnr materials here: <https://learnr.numbat.space/>.
 
 A [shinyapps.io](https://www.shinyapps.io/) account is needed to deploy your app to <https://www.shinyapps.io/> in session 3 (but is not required if you just want to watch this part).
 
@@ -42,7 +42,7 @@ A [shinyapps.io](https://www.shinyapps.io/) account is needed to deploy your app
 
 Just a computer capable of running R and an internet connection! :computer:
 
-This workshop will be ran online, so no other equipment is needed.
+This workshop will be run online, so no other equipment is needed.
 
 ## Required software
 
