@@ -40,7 +40,7 @@ server <- function(input, output, session) {
     )
   
   output$characters <- renderTable({
-    character_data()
+    character_data
   })
 }
 
