@@ -1,14 +1,16 @@
 ---
-title: "Interactive web applications<br> with Shiny for R"
+title: "Interactive web applications with Shiny for R"
+subtitle: A half-day workshop organised by the Statistical Society of Australia.
+title-block-banner: false
 ---
 
 ![](images/shiny.svg){style="float:right;padding: 0 0 0 10px;" fig-alt="Shiny Hex Logo" width="175"}
 
-## Course Overview
+# Course Overview
 
 This three hour workshop provides the basics of creating interactive web applications in R using Shiny. It consists of three sessions that cover the basics of creating a UI, writing server code with reactive programming and publishing your application.
 
-This workshop is part of the [Statistical Society of Australia](https://statsoc.org.au/)'s [Statistical Computing and Visualisation](https://statsoc.org.au/SCV-Tutorials) Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT. 
+This workshop is part of the [Statistical Society of Australia](https://statsoc.org.au/)'s [Statistical Computing and Visualisation](https://www.statsoc.org.au/Statistical-Computing-and-Visualisation-Section) Tutorials, and will run online on Monday 1st December 2023 from 9:00AM - 12:30PM AEDT. 
 
 ## Learning objectives
 
@@ -27,7 +29,6 @@ This workshop is part of the [Statistical Society of Australia](https://statsoc.
 <div align="center">
 <a href="https://www.mitchelloharawild.com"><img border="0" alt="Blog" src="https://assets.dryicons.com/uploads/icon/svg/4926/home.svg" width="35" height="35"></a>&ensp;
 <a href="https://github.com/mitchelloharawild"><img border="0" alt="Github" src="https://assets.dryicons.com/uploads/icon/svg/8312/cc33248a-e56e-4e7f-93f4-0e16350e5768.svg" width="35" height="35"></a>&ensp; 
-<a href="https://twitter.com/mitchoharawild"><img border="0" alt="Twitter" src="https://assets.dryicons.com/uploads/icon/svg/8385/c23f7ffc-ca8d-4246-8978-ce9f6d5bcc99.svg" width="35" height="35"></a>&ensp; 
 <a href="https://www.linkedin.com/in/mitchelloharawild/"><img border="0" alt="LinkedIn" src="https://assets.dryicons.com/uploads/icon/svg/8337/a347cd89-1662-4421-be90-58e5e8004eae.svg" width="35" height="35"></a>&ensp;&emsp;
 </div>
 
@@ -39,7 +40,7 @@ A [shinyapps.io](https://www.shinyapps.io/) account is needed to deploy your app
 
 ## Required equipment
 
-Just a computer capable of running R and an internet connection! 💻
+Just a computer capable of running R and an internet connection! :computer:
 
 This workshop will be ran online, so no other equipment is needed.
 
