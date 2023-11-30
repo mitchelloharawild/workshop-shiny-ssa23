@@ -1,5 +1,5 @@
 library(shiny)
-library(tidyverse)
+library(dplyr)
 
 starwars <- dplyr::starwars %>%
   select(-films, -vehicles, -starships)

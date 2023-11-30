@@ -1,5 +1,5 @@
 library(shiny)
-library(tidyverse)
+
 function(input, output, session) {
   output$plot_proportion <- renderPlot({
     elements_prop <- elements %>% 

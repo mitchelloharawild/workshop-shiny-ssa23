@@ -1,4 +1,9 @@
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+library(forcats)
+library(stringr)
 
 # Tidy the data
 elements <- read_csv("data/elements-by-episode.csv") %>% 

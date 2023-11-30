@@ -58,7 +58,7 @@ Run this code to install the packages if needed:
 ```{r}
 #| eval: false
 packages <- c(
-  "shiny", "shinythemes", "echarts4r",
+  "shiny", "shinythemes", "echarts4r", "dplyr",
   "ggplot2", "readr", "tibble", "tidyr", "stringr", "forcats"
 )
 

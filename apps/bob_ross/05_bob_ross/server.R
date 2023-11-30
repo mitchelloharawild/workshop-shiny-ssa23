@@ -1,5 +1,4 @@
 library(shiny)
-library(tidyverse)
 function(input, output, session) {
   elements_filter <- reactive({
     elements %>% 
