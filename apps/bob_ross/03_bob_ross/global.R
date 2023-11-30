@@ -3,7 +3,7 @@ library(tidyverse)
 # Tidy the data
 elements <- read_csv("data/elements-by-episode.csv") %>% 
   separate(EPISODE, c("season", "episode"), sep = c(3,6)) %>% 
-  gather("element", "exists", -season, -episode, -TITLE) %>% 
+  pivot_longer(cols = c(-season, -episode, -TITLE), names_to = "element", values_to = "exists") %>% 
   mutate(
     season = parse_number(season),
     episode = parse_number(episode),
