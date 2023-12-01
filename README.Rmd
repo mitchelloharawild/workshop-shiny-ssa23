@@ -70,4 +70,4 @@ Participants are expected to be familiar with writing R code, but no prior exper
 * https://github.com/mine-cetinkaya-rundel/shiny-training-2017-05-genentech
 * https://github.com/goknurginer/R-Ladies-shiny-workshop/
 * https://github.com/daattali/advanced-shiny
-* [Cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/shiny.pdf)
+* [Cheat sheet](https://rstudio.github.io/cheatsheets/shiny.pdf)

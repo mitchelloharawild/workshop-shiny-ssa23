@@ -70,4 +70,4 @@ you just want to watch this part).
 - <https://github.com/goknurginer/R-Ladies-shiny-workshop/>
 - <https://github.com/daattali/advanced-shiny>
 - [Cheat
-  sheet](https://github.com/rstudio/cheatsheets/raw/master/shiny.pdf)
+  sheet](https://rstudio.github.io/cheatsheets/shiny.pdf)

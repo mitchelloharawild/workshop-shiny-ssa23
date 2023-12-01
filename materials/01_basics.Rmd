@@ -458,7 +458,7 @@ background-position: top
 .box-12.bg-blond.bottom-margin.center[
 # `r emo::ji("book")` Shiny cheatsheet `r emo::ji("book")`
 # (Inputs and outputs galore)
-https://shiny.rstudio.com/images/shiny-cheatsheet.pdf
+https://rstudio.github.io/cheatsheets/shiny.pdf
 ]
 
 ---
