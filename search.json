@@ -53,7 +53,7 @@
     "href": "index.html#learning-objectives",
     "title": "Interactive web applications with Shiny for R",
     "section": "Learning objectives",
-    "text": "Learning objectives\n\nLearn the basics of Shiny applications\nCreate a simple user interface including dashboards\nUnderstand reactive programming for Shiny server code\nPublish applications online with docker and/or shinyapps.io"
+    "text": "Learning objectives\n\nLearn the basics of Shiny applications\nCreate a simple UI including dashboards\nUnderstand reactive programming for Shiny server code\nPublish applications online with docker and/or shinyapps.io"
   },
   {
     "objectID": "index.html#instructor",
@@ -67,7 +67,7 @@
     "href": "index.html#required-equipment",
     "title": "Interactive web applications with Shiny for R",
     "section": "Required equipment",
-    "text": "Required equipment\nJust a computer capable of running R and an internet connection! 💻\nThis workshop will be ran online, so no other equipment is needed."
+    "text": "Required equipment\nJust a computer capable of running R and an internet connection! 💻\nThis workshop will be run online, so no other equipment is needed."
   },
   {
     "objectID": "index.html#required-software",
