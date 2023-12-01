@@ -1,5 +1,5 @@
 ---
-title: "Schedule"
+title: "Materials"
 listing:
   - id: schedule
     contents:
@@ -19,9 +19,23 @@ tbl-colwidths: [5,20,50,25]
 editor: source
 ---
 
-Friday 1st December 2023
+## Sessions
 
-Online, Zoom invitations have been sent to your registration email.
+Time: 9AM - 12:30PM AEDT, Friday 1st December 2023
+
+Place: Online, Zoom invitations have been sent to your registration email.
+
+## Exercises
+
+Throughout the sessions we will be working with prepared shiny apps.
+
+To follow along and complete the exercises, you should download the apps from the drop-down in the top right, or simply run:
+
+```r
+usethis::use_course("https://workshop.nectric.com.au/shiny-ssa23/apps.zip")
+```
+
+## Schedule
 
 ::: {#schedule}
 :::

@@ -7,6 +7,7 @@ project:
     - "*.qmd"
     - "!materials"
     - "!README.Rmd"
+  pre-render: zip.R
 
 website:
   page-navigation: true
@@ -41,7 +42,7 @@ website:
           - text: Everything! Including this website!
             href: 'https://github.com/mitchelloharawild/workshop-shiny-ssa23/archive/refs/heads/main.zip'
           - text: Course Materials
-            href: 'materials.zip'
+            href: 'slides.zip'
           - text: Shiny Applications
             href: 'apps.zip'
       - icon: file-certificate
